@@ -1,4 +1,6 @@
+import 'package:elisoft/blocs/user/user_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -45,25 +47,21 @@ class _LoginState extends State<Login> {
                   validator: (value)=> value == null || value.isEmpty ? "Please Fill Your Username" : null,
                 ),
                 TextFormField(
+                  controller: passwordCtrl,
                   focusNode: passwordFocusNode,
                   onTap: () => passwordFocusNode.requestFocus(),
                   obscureText: true,
                   textInputAction: TextInputAction.done,
                   validator: (value)=> value == null || value.isEmpty ? "Please Fill your Password" : null,
                 ),
-                Row(
-                  children: [
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:MaterialStateProperty.all(Colors.tealAccent[400])
-                      ),
-                        onPressed: (){
-                          print("${usernameCtrl.text}");
-                        },
-                        child: Text("Login")
-                    )
-                  ],
-                )
+                ElevatedButton(
+                    onPressed: (){
+                      context.read<UserCubit>().setUser(usernameCtrl.text, passwordCtrl.text);
+                      },
+                    style:ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.teal[600])
+                    ),
+                    child: Text("Login"))
               ],
             )
         ),
