@@ -139,9 +139,10 @@ class _LoginState extends State<Login> {
                 }else if(state is UserLoading){
                   print("User Loading");
                 }else if(state is UserLoaded){
-                  Navigator.pushReplacementNamed(context, '/dashboard');
+                  Navigator.pushReplacementNamed(context, '/dashboard', arguments: state.userModel.name);
                   print("User Loaded");
                 }else if(state is UserError){
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${state.userErrorStringMessage}")));
                   print("User Error");
                 }
               },
@@ -153,12 +154,6 @@ class _LoginState extends State<Login> {
                   return loadingDialog();
                 }else if(state is UserLoaded){
                   print("User Loaded");
-                }else if(state is UserError){
-                  print("User Error");
-                  AlertDialog(
-                    title: Text("Login Failed"),
-                    content: Text("${state.userErrorStringMessage}"),
-                  );
                 }
                 print("State OB no widget return");
                 return Container();
