@@ -42,11 +42,7 @@ class _DashboardState extends State<Dashboard> {
                 children: [
                   BlocBuilder<ArticleCubit, ArticleState>(
                       builder: (context, state){
-                        if(state is ArticleInitial){
-                          print("Article Init");
-                          return Container();
-                        }else if(state is ArticleLoading){
-                          print("Article Loading");
+                        if(state is ArticleLoading){
                           return progresIndicator();
                         }else if(state is ArticleLoaded){
                           return SizedBox(
@@ -100,10 +96,7 @@ class _DashboardState extends State<Dashboard> {
               ),
               BlocBuilder<ArticleCubit, ArticleState>(
                   builder: (context, state){
-                    if(state is ArticleInitial){
-                      print("Article Init");
-                      return Container();
-                    }else if(state is ArticleLoading){
+                    if(state is ArticleLoading){
                       print("Article Loading");
                       return progresIndicator();
                     }else if(state is ArticleLoaded){

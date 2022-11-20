@@ -48,6 +48,7 @@ class _LoginState extends State<Login> {
       );
     }
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Stack(
           children: [
@@ -55,6 +56,14 @@ class _LoginState extends State<Login> {
                 key: _formKey,
                 child: Column(
                   children: [
+                    SizedBox(
+                      height: 50,
+                    ),
+                    SizedBox(
+                      height: 300,
+                      width: 300,
+                      child: Image(image: AssetImage('assets/Capture.png'))
+                    ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(50, 30, 50, 10),
                       child: TextFormField(
@@ -134,23 +143,14 @@ class _LoginState extends State<Login> {
             ),
             BlocConsumer<UserCubit, UserState>(
               listener: (context, state){
-                if(state is UserInitial){
-                  print("User Initial");
-                }else if(state is UserLoading){
-                  print("User Loading");
-                }else if(state is UserLoaded){
+               if(state is UserLoaded){
                   Navigator.pushReplacementNamed(context, '/dashboard', arguments: state.userModel.name);
-                  print("User Loaded");
                 }else if(state is UserError){
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${state.userErrorStringMessage}")));
-                  print("User Error");
                 }
               },
               builder: (context, state){
-                if(state is UserInitial){
-                  print("User Initial");
-                }else if(state is UserLoading){
-                  print("User Loading");
+                if(state is UserLoading){
                   return loadingDialog();
                 }else if(state is UserLoaded){
                   print("User Loaded");

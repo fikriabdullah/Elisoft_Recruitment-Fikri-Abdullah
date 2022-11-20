@@ -23,9 +23,6 @@ class UserCubit extends Cubit<UserState> {
          },
          body:jsonBody
      );
-     print("user input : $password");
-     print(response.statusCode);
-     print(response.body);
      if(jsonDecode(response.body)['status'] == true && response.statusCode == 200){
        emit(UserLoaded(
            UserModel(
@@ -36,11 +33,9 @@ class UserCubit extends Cubit<UserState> {
           )
        );
      }else{
-       print("Login Failed : ${response.statusCode} ${jsonDecode(response.body)['errors']['email']}");
        emit(UserError("Login Failed : ${jsonDecode(response.body)['errors']['email']}"));
      }
    }catch(e){
-     print("Login Eror ${e.toString()}");
      emit(UserError("User Fecthing Error : ${e.toString()}"));
    }
 

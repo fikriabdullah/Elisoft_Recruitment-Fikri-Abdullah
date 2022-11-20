@@ -8,9 +8,6 @@ import 'dart:convert';
 
 part 'article_state.dart';
 
-///TODOS : convert article objet to list so it can be used for listview.builder in dashboard
-///
-
 class ArticleCubit extends Cubit<ArticleState> {
   ArticleCubit() : super(ArticleInitial());
   
@@ -34,11 +31,9 @@ class ArticleCubit extends Cubit<ArticleState> {
         );
       }else{
         emit(ArticleError("Fetching Article Failed : ${response.statusCode}"));
-        print("Fetching Article Failed : ${response.statusCode} || ${jsonDecode(response.body)}");
       }
     }catch(e){
       emit(ArticleError("Fetching Article Error : ${e.toString()}"));
-      print("Fetching Article Error : ${e.toString()}");
     }
   }
 }
