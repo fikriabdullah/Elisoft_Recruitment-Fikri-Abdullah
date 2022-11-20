@@ -1,9 +1,13 @@
-class ArticleModel{
-String dateTime;
-String content;
-String imageDwnldUrl;
-String title;
+class ArticleModel {
+  bool status;
+  List articles;
 
-ArticleModel({required this.title, required this.dateTime, required this.content, required this.imageDwnldUrl});
+  ArticleModel({required this.articles, required this.status});
 
+  factory ArticleModel.fromJson(Map<String, dynamic> json){
+    return ArticleModel(
+        articles: json['articles'],
+        status: json['status']
+    );
+  }
 }
