@@ -127,7 +127,11 @@ class _DashboardState extends State<Dashboard> {
                                             SizedBox(
                                               height: 100,
                                               width: 100,
-                                              child: Image.network("${state.articleModel.articles[index]['image']}"),
+                                              child: Image.network("${state.articleModel.articles[index]['image']}",
+                                                errorBuilder: (context, exception, starckTrace){
+                                                  return Text("Image Error ${exception.toString()}");
+                                                },
+                                              ),
                                             ),
                                             SizedBox(width: 10,),
                                             Flexible(child: Text("${state.articleModel.articles[index]['title']}", style: TextStyle(
